@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    $db = '';
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete</title>
-</head>
+    if(file_exists('db.json')){
+        $json = file_get_contents('db.json');
+        $db = json_decode($json, true);
+    }
+    else{
+        $db = array();
+    }
 
-<body>
-    <?php
-        if (!isset($_POST['id'])) {
-            echo 'No such Book-id';
-        } else {
-            $bookJson = file_get_contents('books.json');
-            $books = json_decode($bookJson, true);
-            $arr = [];
-            foreach ($books as $book) {
-                if ($book['id'] != $_POST['id']) {
-                    array_push($arr, $book);
-                }
-            }
-            $books = json_encode($arr);
-            file_put_contents('books.json', $books);
-            echo 'Book deleted';
-        }
-    ?>
-</body>
+    $key = $_GET['id'];
+    array_splice($db, $key, 1);
 
-</html>
+    $db_enc = json_encode($db);
+    file_put_contents('db.json', $db_enc);
+
+    header('Location: index.php');
+?>
+Deleted!
