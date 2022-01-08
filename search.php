@@ -58,7 +58,7 @@ if (isset($_POST['search'])) {
         </div>
     </nav>
     
-    <h4 class="title-search text-success mt-2 mb-0">Search results for : <?php echo $search_key;?></h4>
+    <h4 class="title-search text-info mt-2 mb-0">Search results for : <?php echo $search_key;?></h4>
     
     <div class="border-left-1">
         <table class="table-main table table-striped table-sm">
